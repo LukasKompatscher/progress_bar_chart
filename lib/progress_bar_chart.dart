@@ -13,6 +13,7 @@ class ProgressBarChart extends StatefulWidget {
     required this.values,
     this.borderRadius,
     this.showLables = true,
+    this.colorBlend = true,
   });
 
   /// A map that maps colors to their corresponding progress values.
@@ -39,6 +40,9 @@ class ProgressBarChart extends StatefulWidget {
 
   /// Whether to show the labels on the progress bars (optional).
   final bool showLables;
+
+  /// Whether to blend the colors of the progress bars (optional).
+  final bool colorBlend;
 
   @override
   State<ProgressBarChart> createState() => _ProgressBarChartState();
@@ -104,6 +108,13 @@ class _ProgressBarChartState extends State<ProgressBarChart>
         : result.toStringAsFixed(1);
   }
 
+  Color getTextColor(Color color) {
+    if (widget.colorBlend) {
+      return Color.alphaBlend(color.withOpacity(0.5), Colors.black);
+    }
+    return color.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -155,11 +166,7 @@ class _ProgressBarChartState extends State<ProgressBarChart>
                                               '${formatText(widget.values[entry.key]!)} ${textWidth > 60 ? '%' : ''}',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: entry.key
-                                                            .computeLuminance() >
-                                                        0.5
-                                                    ? Colors.black
-                                                    : Colors.white,
+                                                color: getTextColor(entry.key),
                                                 fontSize: widget.height * 0.5,
                                                 fontWeight: FontWeight.w700,
                                                 decoration: TextDecoration.none,
