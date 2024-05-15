@@ -1,21 +1,10 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+# progress_bar_chart
 
 A package to display multipe values on a vertical chart using progess indicators and animation.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+![Example](https://raw.githubusercontent.com/LukasKompatscher/progress_bar_chart/master/assets/example.gif)
 
 ## Usage
 
