@@ -104,7 +104,7 @@ class _ProgressBarChartState extends State<ProgressBarChart> with TickerProvider
     return original
         ? result % 1 == 0
             ? formatResult
-            : result.toString()
+            : result.toStringAsFixed(2)
         : formatResult;
   }
 

@@ -1,3 +1,7 @@
+# 0.0.7
+
+* Text formatting for the tooltip is now more readable
+
 # 0.0.6
 
 * Changed tooltip decoration to be more visible
