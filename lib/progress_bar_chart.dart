@@ -48,8 +48,7 @@ class ProgressBarChart extends StatefulWidget {
   State<ProgressBarChart> createState() => _ProgressBarChartState();
 }
 
-class _ProgressBarChartState extends State<ProgressBarChart>
-    with TickerProviderStateMixin {
+class _ProgressBarChartState extends State<ProgressBarChart> with TickerProviderStateMixin {
   Map<Color, AnimationController> controllers = {};
   Map<Color, Animation<double>> animations = {};
   Map<Color, double> sortedValues = {};
@@ -61,8 +60,7 @@ class _ProgressBarChartState extends State<ProgressBarChart>
     double total = 0.0;
 
     // Sort the values in descending order
-    sortedValues = Map.fromEntries(widget.values.entries.toList()
-      ..sort((a, b) => b.value.compareTo(a.value)));
+    sortedValues = Map.fromEntries(widget.values.entries.toList()..sort((a, b) => b.value.compareTo(a.value)));
 
     // Calculate the cumulative total for each value
     sortedValues = sortedValues.map((key, value) {
@@ -77,8 +75,7 @@ class _ProgressBarChartState extends State<ProgressBarChart>
 
     // Create animation controllers and animations for each value
     for (var entry in sortedValues.entries) {
-      final duration = Duration(
-          milliseconds: (maxDuration.inMilliseconds * entry.value).round());
+      final duration = Duration(milliseconds: (maxDuration.inMilliseconds * entry.value).round());
       controllers[entry.key] = AnimationController(
         duration: duration,
         vsync: this,
@@ -101,11 +98,14 @@ class _ProgressBarChartState extends State<ProgressBarChart>
     super.dispose();
   }
 
-  String formatText(double value) {
+  String formatText(double value, {bool original = false}) {
     double result = value * 100;
-    return result % 1 == 0
-        ? result.toInt().toString()
-        : result.toStringAsFixed(1);
+    String formatResult = result.toInt().toString();
+    return original
+        ? result % 1 == 0
+            ? formatResult
+            : result.toString()
+        : formatResult;
   }
 
   Color getTextColor(Color color) {
@@ -132,44 +132,53 @@ class _ProgressBarChartState extends State<ProgressBarChart>
                       builder: (context, child) {
                         return Stack(
                           children: [
-                            LinearProgressIndicator(
-                              minHeight: widget.height,
-                              value: animations[entry.key]?.value,
-                              backgroundColor: Colors.transparent,
-                              color: entry.key,
-                              semanticsValue: entry.value.toString(),
-                              borderRadius: widget.borderRadius != null
-                                  ? BorderRadius.circular(widget.borderRadius!)
-                                  : BorderRadius.zero,
+                            IgnorePointer(
+                              child: LinearProgressIndicator(
+                                minHeight: widget.height,
+                                value: animations[entry.key]?.value,
+                                backgroundColor: Colors.transparent,
+                                color: entry.key,
+                                semanticsValue: entry.value.toString(),
+                                borderRadius: widget.borderRadius != null
+                                    ? BorderRadius.circular(widget.borderRadius!)
+                                    : BorderRadius.zero,
+                              ),
                             ),
                             if (widget.showLables)
                               Builder(
                                 builder: (context) {
-                                  final textWidth =
-                                      width * widget.values[entry.key]!;
+                                  final textWidth = width * widget.values[entry.key]!;
                                   if (textWidth < 40) return Container();
                                   return FutureBuilder(
-                                    future: Future.delayed(
-                                        const Duration(microseconds: 500)),
+                                    future: Future.delayed(const Duration(microseconds: 500)),
                                     builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
+                                      if (snapshot.connectionState == ConnectionState.waiting) {
                                         return Container();
                                       } else {
                                         return Container(
                                           width: width * entry.value,
                                           height: widget.height,
                                           alignment: Alignment.centerRight,
-                                          child: SizedBox(
-                                            width: textWidth,
-                                            child: Text(
-                                              '${formatText(widget.values[entry.key]!)} ${textWidth > 60 ? '%' : ''}',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                color: getTextColor(entry.key),
-                                                fontSize: widget.height * 0.5,
-                                                fontWeight: FontWeight.w700,
-                                                decoration: TextDecoration.none,
+                                          child: Tooltip(
+                                            message: '${formatText(widget.values[entry.key]!, original: true)}%',
+                                            triggerMode: TooltipTriggerMode.tap,
+                                            decoration: BoxDecoration(
+                                              color: entry.key.withOpacity(0.5),
+                                              borderRadius: widget.borderRadius != null
+                                                  ? BorderRadius.circular(widget.borderRadius!)
+                                                  : BorderRadius.zero,
+                                            ),
+                                            child: SizedBox(
+                                              width: textWidth,
+                                              child: Text(
+                                                '${formatText(widget.values[entry.key]!)} ${textWidth > 60 ? '%' : ''}',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: getTextColor(entry.key),
+                                                  fontSize: widget.height * 0.5,
+                                                  fontWeight: FontWeight.w700,
+                                                  decoration: TextDecoration.none,
+                                                ),
                                               ),
                                             ),
                                           ),

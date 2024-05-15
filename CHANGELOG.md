@@ -1,3 +1,7 @@
+# 0.0.5
+
+* Added tooltips to show the percentage of the progress bar
+
 # 0.0.4
 
 * Colorblend contrast increased
