@@ -1,6 +1,6 @@
 # progress_bar_chart
 
-A package to display multipe values on a vertical chart using progess indicators and animation.
+A package to display multipe values on a vertical chart using progess indicators and animation.  Each value can has a color 
 
 ## Features
 
