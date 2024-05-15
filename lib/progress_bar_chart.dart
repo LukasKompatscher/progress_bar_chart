@@ -12,10 +12,8 @@ class ProgressBarChart extends StatefulWidget {
     required this.height,
     required this.values,
     this.borderRadius,
+    this.showLables = true,
   });
-
-  /// The height of the progress bar chart.
-  final double height;
 
   /// A map that maps colors to their corresponding progress values.
   ///
@@ -33,8 +31,14 @@ class ProgressBarChart extends StatefulWidget {
   /// ```
   final Map<Color, double> values;
 
+  /// The height of the progress bar chart.
+  final double height;
+
   /// The border radius of the progress bars (optional).
   final double? borderRadius;
+
+  /// Whether to show the labels on the progress bars (optional).
+  final bool showLables;
 
   @override
   State<ProgressBarChart> createState() => _ProgressBarChartState();
@@ -127,46 +131,47 @@ class _ProgressBarChartState extends State<ProgressBarChart>
                                   ? BorderRadius.circular(widget.borderRadius!)
                                   : BorderRadius.zero,
                             ),
-                            Builder(
-                              builder: (context) {
-                                final textWidth =
-                                    width * widget.values[entry.key]!;
-                                if (textWidth < 40) return Container();
-                                return FutureBuilder(
-                                  future: Future.delayed(
-                                      const Duration(microseconds: 500)),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return Container();
-                                    } else {
-                                      return Container(
-                                        width: width * entry.value,
-                                        height: widget.height,
-                                        alignment: Alignment.centerRight,
-                                        child: SizedBox(
-                                          width: textWidth,
-                                          child: Text(
-                                            '${formatText(widget.values[entry.key]!)} ${textWidth > 60 ? '%' : ''}',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color:
-                                                  entry.key.computeLuminance() >
-                                                          0.5
-                                                      ? Colors.black
-                                                      : Colors.white,
-                                              fontSize: widget.height * 0.5,
-                                              fontWeight: FontWeight.w700,
-                                              decoration: TextDecoration.none,
+                            if (widget.showLables)
+                              Builder(
+                                builder: (context) {
+                                  final textWidth =
+                                      width * widget.values[entry.key]!;
+                                  if (textWidth < 40) return Container();
+                                  return FutureBuilder(
+                                    future: Future.delayed(
+                                        const Duration(microseconds: 500)),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return Container();
+                                      } else {
+                                        return Container(
+                                          width: width * entry.value,
+                                          height: widget.height,
+                                          alignment: Alignment.centerRight,
+                                          child: SizedBox(
+                                            width: textWidth,
+                                            child: Text(
+                                              '${formatText(widget.values[entry.key]!)} ${textWidth > 60 ? '%' : ''}',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: entry.key
+                                                            .computeLuminance() >
+                                                        0.5
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: widget.height * 0.5,
+                                                fontWeight: FontWeight.w700,
+                                                decoration: TextDecoration.none,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ).animate().fadeIn();
-                                    }
-                                  },
-                                );
-                              },
-                            )
+                                        ).animate().fadeIn();
+                                      }
+                                    },
+                                  );
+                                },
+                              )
                           ],
                         );
                       },
