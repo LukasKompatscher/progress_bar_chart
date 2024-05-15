@@ -1,3 +1,7 @@
+# 0.0.4
+
+* Colorblend contrast increased
+
 # 0.0.3
 
 * Added colorBlend option to make textcolor appear better on the progress bar

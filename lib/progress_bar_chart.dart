@@ -110,7 +110,7 @@ class _ProgressBarChartState extends State<ProgressBarChart>
 
   Color getTextColor(Color color) {
     if (widget.colorBlend) {
-      return Color.alphaBlend(color.withOpacity(0.5), Colors.black);
+      return Color.alphaBlend(color.withOpacity(0.3), Colors.black);
     }
     return color.computeLuminance() > 0.5 ? Colors.black : Colors.white;
   }
