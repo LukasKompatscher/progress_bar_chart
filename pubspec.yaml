@@ -1,6 +1,6 @@
 name: progress_bar_chart
 description: 'A package to display multipe values on a vertical chart using progess indicators and animation.'
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/LukasKompatscher/progress_bar_chart
 
 environment:

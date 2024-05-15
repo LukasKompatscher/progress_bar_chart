@@ -1,3 +1,7 @@
+# 0.0.6
+
+* Changed tooltip decoration to be more visible
+
 # 0.0.5
 
 * Added tooltips to show the percentage of the progress bar

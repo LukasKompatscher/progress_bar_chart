@@ -162,12 +162,6 @@ class _ProgressBarChartState extends State<ProgressBarChart> with TickerProvider
                                           child: Tooltip(
                                             message: '${formatText(widget.values[entry.key]!, original: true)}%',
                                             triggerMode: TooltipTriggerMode.tap,
-                                            decoration: BoxDecoration(
-                                              color: entry.key.withOpacity(0.5),
-                                              borderRadius: widget.borderRadius != null
-                                                  ? BorderRadius.circular(widget.borderRadius!)
-                                                  : BorderRadius.zero,
-                                            ),
                                             child: SizedBox(
                                               width: textWidth,
                                               child: Text(
