@@ -1,3 +1,7 @@
+# 0.0.10
+
+* Fixed height of widget
+
 # 0.0.9
 
 * Unit label added to the tooltip and chart

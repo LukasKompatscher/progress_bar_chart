@@ -124,13 +124,13 @@ class _ProgressBarChartState extends State<ProgressBarChart>
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final width = constraints.maxWidth;
-        return Center(
-          child: SizedBox(
+    return SizedBox(
+      height: widget.height,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final width = constraints.maxWidth;
+          return SizedBox(
             width: width,
-            height: widget.height,
             child: Stack(
               children: sortedValues.entries
                   .map(
@@ -204,9 +204,9 @@ class _ProgressBarChartState extends State<ProgressBarChart>
                   )
                   .toList(),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
