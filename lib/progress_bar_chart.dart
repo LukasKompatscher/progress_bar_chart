@@ -14,6 +14,7 @@ class ProgressBarChart extends StatefulWidget {
     this.borderRadius,
     this.showLables = true,
     this.colorBlend = true,
+    this.unitLabel = '%',
   });
 
   /// A map that maps colors to their corresponding progress values.
@@ -43,6 +44,9 @@ class ProgressBarChart extends StatefulWidget {
 
   /// Whether to blend the colors of the progress bars (optional).
   final bool colorBlend;
+
+  /// The unit label of the progress values (optional).
+  final String unitLabel;
 
   @override
   State<ProgressBarChart> createState() => _ProgressBarChartState();
@@ -169,12 +173,12 @@ class _ProgressBarChartState extends State<ProgressBarChart>
                                           alignment: Alignment.centerRight,
                                           child: Tooltip(
                                             message:
-                                                '${formatText(widget.values[entry.key]!, original: true)}%',
+                                                '${formatText(widget.values[entry.key]!, original: true)}${widget.unitLabel}',
                                             triggerMode: TooltipTriggerMode.tap,
                                             child: SizedBox(
                                               width: textWidth,
                                               child: Text(
-                                                '${formatText(widget.values[entry.key]!)} ${textWidth > 60 ? '%' : ''}',
+                                                '${formatText(widget.values[entry.key]!)} ${textWidth > 60 ? widget.unitLabel : ''}',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   color:
