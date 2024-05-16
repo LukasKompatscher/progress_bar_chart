@@ -1,3 +1,7 @@
+# 0.0.11
+
+* Added totalPercentage to overgive values depending on the total
+
 # 0.0.10
 
 * Fixed height of widget
