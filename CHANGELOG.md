@@ -1,5 +1,9 @@
 # 0.0.7
 
+* Dart formatting fixed
+
+# 0.0.7
+
 * Text formatting for the tooltip is now more readable
 
 # 0.0.6
