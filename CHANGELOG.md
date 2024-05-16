@@ -1,3 +1,7 @@
+# 0.0.12
+
+* Added number formatting according to the locale
+
 # 0.0.11
 
 * Added totalPercentage to overgive values depending on the total

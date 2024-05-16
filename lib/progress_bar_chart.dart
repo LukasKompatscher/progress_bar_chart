@@ -2,6 +2,7 @@ library progress_bar_chart;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:intl/intl.dart';
 
 /// A widget that displays a progress bar chart.
 ///
@@ -115,12 +116,15 @@ class _ProgressBarChartState extends State<ProgressBarChart>
 
   String formatText(double value, {bool original = false}) {
     double result = widget.totalPercentage != 0 ? value : value * 100;
-    String formatResult = result.toInt().toString();
+    int formatResult = result.toInt();
+    var languageCode = Localizations.localeOf(context).languageCode;
+    final numberFormat = NumberFormat.decimalPattern(languageCode);
+    String ret = numberFormat.format(formatResult);
     return original
         ? result % 1 == 0
-            ? formatResult
+            ? ret
             : result.toStringAsFixed(2)
-        : formatResult;
+        : ret;
   }
 
   Color getTextColor(Color color) {
