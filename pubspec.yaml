@@ -1,21 +1,21 @@
 name: progress_bar_chart
-description: 'A package to display multipe values on a vertical chart using progess indicators and animation.'
-version: 0.0.12
+description: "A package to display multipe values on a vertical chart using progess indicators and animation."
+version: 0.0.13
 homepage: https://github.com/LukasKompatscher/progress_bar_chart
 
 environment:
-  sdk: '>=3.3.4 <4.0.0'
-  flutter: '>=1.17.0'
+  sdk: ">=3.3.4 <4.0.0"
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.19.0
+  intl: ^0.20.2
   flutter_animate: ^4.5.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
